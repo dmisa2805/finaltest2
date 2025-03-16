@@ -18,15 +18,11 @@ const addTask = (name) => {
   }
 };
 
-const handlePressEnter = (e) => {
+const handleSubmitForm = (e) => {
   e.preventDefault(); 
-  console.log(e.target.value)
   addTask(taskName);
 };
 
-const handleClickAdd = () => {
-  addTask(taskName);
-};
 // deleteTask
  const deleteTask = (taskId) => {
   setTasks(tasks.filter((task) => task.id !== taskId));
@@ -60,21 +56,21 @@ const handleClickAdd = () => {
 
         {/* addTask */}
         {activeTab !== "Completed" && (
-          <div className="flex flex-row gap-4 m-4">
+          <form onSubmit={handleSubmitForm} className="flex flex-row gap-4 m-4">
             <Input 
               className="!h-10 !px-4 !py-6" 
               placeholder="add details" 
               value={taskName}
               onChange={(e) => setTaskName(e.target.value)}
-              onPressEnter={handlePressEnter}
              />
             <Button 
               className="!h-10 !px-8 !py-6" 
               type="primary" 
-              onClick={handleClickAdd}>
+              onClick={handleSubmitForm}
+              >
                 Add
             </Button>
-          </div>
+          </form>
           )
         }
 
